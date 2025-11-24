@@ -1,0 +1,81 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Popup.Master.cs" ClientIDMode="Static" Inherits="logiman.cargomanager.co.kr.PopupMaster" %>
+<%@ Import Namespace="CommonLibrary.Constants" %>
+<%@ Import Namespace="CommonLibrary.CommonModule" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head runat="server">
+    <title><%=Server.HtmlEncode(CommonConstant.SITE_TITLE)%></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/LibJS") %>
+        <script type="text/javascript" src="/js/lib/jquery-ui/jquery-ui.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+        <script type="text/javascript" src="/js/common.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+        <script type="text/javascript" src="/js/utils.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+        <%: Scripts.Render("~/js/lib/sweetalert2/sweetalert2.js") %>
+
+        <!--SlickGrid-->
+        <script type="text/javascript" src="/js/lib/SlickGrid/exceljs.min.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/Sortable.min.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/sortable-cdn-fallback.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.core.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.interactions.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.grid.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.editors.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.pager.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.dataview.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.formatters.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellcopymanager.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellrangedecorator.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellrangeselector.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellexternalcopymanager.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellselectionmodel.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/SlickGridCommon.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+    </asp:PlaceHolder>
+
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="/css/sweetalert2.min.css" />
+    <link rel="stylesheet" href="/css/admin.css?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>" />
+    <link rel="stylesheet" href="/css/reset.css?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>" />
+    <webopt:bundlereference runat="server" path="~/Content/css" /> 
+    <!--SlickGrid Css-->
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick.grid.css"/>
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick-icons.css"/>
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick-alpine-theme.css"/>
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick.pager.css"/>
+
+    <asp:ContentPlaceHolder id="headscript" runat="server"></asp:ContentPlaceHolder>
+    <script>
+        function __doPostBackAsync(eventName, eventArgs) {
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+            if (!Array.contains(prm._asyncPostBackControlIDs, eventName)) {
+                prm._asyncPostBackControlIDs.push(eventName);
+            }
+
+            if (!Array.contains(prm._asyncPostBackControlClientIDs, eventName)) {
+                prm._asyncPostBackControlClientIDs.push(eventName);
+            }
+
+            __doPostBack(eventName, eventArgs);
+        }
+    </script>
+</head>
+<body style="overflow-y:auto;" class="theme-css popup">
+    <form id="mainform" runat="server" method="post">
+        <asp:HiddenField runat="server" ID="p_popup" />
+        <div class="exception">
+            <div runat="server" id="divPOPUP_TITLE_LAYER">
+                <asp:Label runat="server" ID="lblPOPUP_TITLE" style="font-size:18px;font-weight:400"></asp:Label>
+            </div>
+
+            <asp:ContentPlaceHolder id="MainContent" runat="server"></asp:ContentPlaceHolder>        
+        
+        </div>
+
+        <!-- Loader //-->
+        <div id="divLoadingImage" class="popup_loading" style="display: none;"><img src="/images/loading.gif" alt="Loading..." /></div>
+        <!-- Loader //-->
+    </form>
+</body>
+</html>

@@ -1,0 +1,145 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" ClientIDMode="Static" CodeBehind="Site.master.cs" Inherits="easycc.co.kr.SiteMaster" %>
+<%@ Import Namespace="CommonLibrary.Constants" %>
+<%@ Import Namespace="CommonLibrary.CommonModule" %>
+<!DOCTYPE html>
+<html lang="ko">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%=Server.HtmlEncode(CommonConstant.SITE_TITLE)%></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/LibJS") %>
+        <script type="text/javascript" src="/js/lib/jquery-ui/jquery-ui.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+        <script type="text/javascript" src="/js/common.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+        <script type="text/javascript" src="/js/utils.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+        <%: Scripts.Render("~/js/lib/sweetalert2/sweetalert2.js") %>
+
+        <!--SlickGrid-->
+        <script type="text/javascript" src="/js/lib/SlickGrid/exceljs.min.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/Sortable.min.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/sortable-cdn-fallback.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.core.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.dataview.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.groupitemmetadataprovider.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.interactions.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.grid.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.editors.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.pager.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.formatters.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellcopymanager.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellrangedecorator.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellrangeselector.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellexternalcopymanager.js"></script>
+        <script type="text/javascript" src="/js/lib/SlickGrid/slick.cellselectionmodel.js"></script>
+        
+        <script type="text/javascript" src="/js/lib/SlickGrid/SlickGridCommon.js?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>"></script>
+    </asp:PlaceHolder>
+    
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="/css/sweetalert2.min.css" />
+    <link rel="stylesheet" href="/css/admin.css?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>" />
+    <link rel="stylesheet" href="/css/reset.css?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>" />
+    <webopt:bundlereference runat="server" path="~/Content/css" />   
+
+    <asp:ContentPlaceHolder id="headscript" runat="server"></asp:ContentPlaceHolder>
+    <script>
+        function fnOpenRightSubLayer(title, url, popWidth, popHeight, layerWidth) {       // layerWidth : 값 미지정시, 디펄트는 50%
+            $("#iframePopupLoading").show();
+            $("#hid_LAYER_TITLE").val(title);
+            $("#hid_LAYER_WIDTH").val(popWidth);
+            $("#hid_LAYER_HEIGHT").val(popHeight);
+            if (layerWidth !== "") {
+                $("#cp_layer").css("width", layerWidth);
+            }
+
+            $("#lbl_LAYER_TITLE").html($("#hid_LAYER_TITLE").val());
+
+            if (url.split('?').length > 1) {
+                $("#hid_LAYER_URL").val(url + "&title=" + encodeURI(title));
+            }
+            else {
+                $("#hid_LAYER_URL").val(url + "?title=" + encodeURI(title));
+            }
+
+            var $form = null;
+            if ($("form[name=layerIframeForm]").length > 0) {
+                $form = $("form[name=layerIframeForm]");
+                $form.remove();
+                $form = null;
+            }
+            $("div.popup_loading").show();
+            $form = $("<form name='layerIframeForm'></form>");
+            $form.attr("action", $("#hid_LAYER_URL").val());
+            $form.attr("method", "post");
+            $form.attr("target", "ifrm_layer");
+
+            var formData = $("#mainform").serializeObject();
+            $form.addHidden(formData);
+            $form.appendTo("body");
+            $form.submit();
+            $form.remove();
+
+            fnOpenCpLayer();
+        }
+
+        $(function () {
+            $('#ifrm_layer').on("load", function () {
+                $("#iframePopupLoading").hide();
+            });
+        });
+    </script>
+    <!--SlickGrid Css-->
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick.grid.css"/>
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick-icons.css"/>
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick-alpine-theme.css"/>
+    <link rel="stylesheet" href="/js/lib/SlickGrid/css/slick.pager.css"/>
+    <style>
+        .slick-cell {
+            line-height:35px;
+            -webkit-user-select: none; /* Chrome, Safari */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* IE10+ */
+            user-select: none;         /* 표준 */
+        }
+    </style>
+</head>
+<body>
+    <form id="mainform" runat="server" method="post" action="">
+        <asp:HiddenField runat="server" ID="hid_LAYER_TITLE" Value="EasyCC" />
+        <asp:HiddenField runat="server" ID="hid_LAYER_WIDTH" Value="" />
+        <asp:HiddenField runat="server" ID="hid_LAYER_HEIGHT" Value="" />
+        <asp:HiddenField runat="server" ID="hid_LAYER_URL" Value="Default.html" />
+        <!-- container // - start -->
+        <div class="container">
+	        <!-- content//start -->
+	        <div id="content" class="content">
+                <div class="content_area dsh">
+                    <asp:ContentPlaceHolder id="MainContent" runat="server"></asp:ContentPlaceHolder>    
+                </div>
+            </div>	
+	        <!-- content//end -->
+        </div>
+        <!-- container // - end -->
+        <!-- Loader //-->
+        <div id="divLoadingImage" style="display: none;"><img src="/images/loading.gif" alt="Loading..." /></div>
+        <!-- Loader //-->
+
+        <!--우측상세 레이어 시작-->
+        <div id="cp_layer">
+            <div class="cp_layer_top">
+	            <h1><asp:Label runat="server" ID="lbl_LAYER_TITLE" style="font-size:14px; font-weight:600;"></asp:Label></h1>
+	            <ul class="cp_layer_controll">
+                    <li id="cp_layer_smallLayer" style="display:none"><a href="javascript:fnSmallLayer();" title="기본화면"></a></li>
+		            <li id="cp_layer_bigLayer"><a href="javascript:fnBigLayer();" title="최대화면"></a></li>
+		            <li><a href="javascript:fnCloseCpLayer();" title="닫기"></a></li>
+	            </ul>
+            </div>
+            <div class="cp_layer_body">
+	            <iframe src="" id="ifrm_layer" name="ifrm_layer" scrolling="no" frameborder="0"></iframe>
+                <div id="iframePopupLoading"><img src="/images/loading.gif" alt="Loading..." /></div>
+            </div>
+        </div>
+        <!--우측상세 레이어 끝-->
+    </form>
+</body>
+</html>
