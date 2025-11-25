@@ -9,9 +9,9 @@
 
 header{width: 100%;height: 60px;height: auto;background:#00929c;position: relative;z-index:3;min-width: 1640px; position:absolute; top:0px; left:0px; z-index:9;}
 .header .hd_inner{/* width: 1640px; */width: 100%;margin:0 auto;height: 50px;box-sizing: border-box;position: relative;border-bottom: solid 1px rgba(255, 255, 255, 0.3);}
-.header .logo{padding: 2px 0 0 20px;box-sizing: border-box;}
+.header .logo{padding: 2px 0 0 10px;box-sizing: border-box;}
 /*.header .logo a{display: block;}*/
-.header .logo img{/*width:110px;*/margin-top:7px;}
+.header .logo img{width:140px; margin-top:12px;}
 
 .header .gnb{position: absolute;right: 0; top:0;}
 .header .gnb ul{display: inline-block;display: block;float: left;}

@@ -62,8 +62,8 @@
         <asp:HiddenField runat="server" ID="asd" />
         <!-- login_wrap//start================================//-->
         <div class="login_wrap">
-	        <div class="login_logo"><img src="/images/logo_login.png" alt="티엘링크"></div>
-	        <div class="login_title">티엘링크 로그인</div>	  	
+	        <div class="login_logo"><img src="/images/logo_login.png" alt="easycc"></div>
+	        <div class="login_title">easycc 로그인</div>	  	
 	        <div class="login_body">	    	
 		        <ul>
 			        <li><asp:TextBox runat="server" ID="AdminID" CssClass="id" placeholder="아이디"/></li>

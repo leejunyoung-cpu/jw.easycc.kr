@@ -230,5 +230,71 @@ namespace CommonLibrary.DBServices
 
             return lo_objResult;
         }
+
+        public ServiceResult<ResClientList> GetApiHuaweiList(ReqClientList objReqClientList)
+        {
+            SiteGlobal.WriteInformation("ClientService", "I", $"[GetApiHuaweiList REQ] {JsonConvert.SerializeObject(objReqClientList)}", bLogWrite);
+
+            string lo_strJson = string.Empty;
+            ServiceResult<ResClientList> lo_objResult = null;
+            ConnectGlobal lo_objDB = null;
+
+            try
+            {
+                lo_objResult = new ServiceResult<ResClientList>(999);
+                lo_objDB = new ConnectGlobal();
+
+                lo_objDB.Open(SiteGlobal.ConnectionString, "UP_CLIENT_AR_LST");
+                lo_objDB.AddInputParam("@pi_intClientCode", SqlDbType.Int, objReqClientList.ClientCode, 4);
+                lo_objDB.AddInputParam("@pi_strCorpNo", SqlDbType.VarChar, objReqClientList.CorpNo, 20);
+                lo_objDB.AddInputParam("@pi_strClientName", SqlDbType.NVarChar, objReqClientList.ClientName, 50);
+                lo_objDB.AddInputParam("@pi_strClientCeoName", SqlDbType.NVarChar, objReqClientList.ClientCeoName, 50);
+                lo_objDB.AddInputParam("@pi_strAdminID", SqlDbType.VarChar, objReqClientList.AdminID, 50);
+
+                lo_objDB.AddInputParam("@pi_strUseFlag", SqlDbType.Char, objReqClientList.UseFlag, 1);
+                lo_objDB.AddInputParam("@pi_intPageSize", SqlDbType.Int, objReqClientList.PageSize, 4);
+                lo_objDB.AddInputParam("@pi_intPageNo", SqlDbType.Int, objReqClientList.PageNo, 4);
+                lo_objDB.AddOutputParam("@po_intRecordCnt", SqlDbType.Int, 4);
+                lo_objDB.SetQuery();
+
+                if (!lo_objDB.LastErrorCode.Equals(0))
+                {
+                    lo_objResult.SetResult(996, lo_objDB.LastErrorMessage
+                                         , 0, $"[{lo_objDB.LastErrorCode}]{lo_objDB.LastErrorMessage}");
+                    return lo_objResult;
+                }
+
+                //Response 값 셋팅                
+                lo_objResult.SetResult(0);
+
+                lo_objResult.data = new ResClientList
+                {
+                    list = new List<ClientViewModel>(),
+                    RecordCnt = lo_objDB.GetOutputParamValue("@po_intRecordCnt").ToInt(),
+                };
+
+                if (lo_objDB.GetOutputParamValue("@po_intRecordCnt").ToInt() > 0)
+                {
+                    lo_strJson = JsonConvert.SerializeObject(lo_objDB.ExecuteDataTable());
+                    lo_objResult.data.list = JsonConvert.DeserializeObject<List<ClientViewModel>>(lo_strJson);
+                }
+            }
+            catch (Exception lo_ex)
+            {
+                lo_objResult.SetResult(997, "An unexpected error occurred during accessing data"
+                                     , 9101, "System error(GetApiHuaweiList)" + lo_ex.Message);
+            }
+            finally
+            {
+
+                if (lo_objDB != null)
+                {
+                    lo_objDB.Close();
+                    lo_objDB = null;
+                }
+                SiteGlobal.WriteInformation("ClientService", "I", $"[GetApiHuaweiList RES] {JsonConvert.SerializeObject(lo_objResult)}", bLogWrite);
+            }
+            return lo_objResult;
+        }
     }
 }

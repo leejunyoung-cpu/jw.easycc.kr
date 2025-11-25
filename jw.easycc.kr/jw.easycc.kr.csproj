@@ -123,6 +123,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="API\Huawei\ApiHuaweiList.aspx" />
+    <Content Include="API\Huawei\Proc\ClientIns.js" />
+    <Content Include="API\Huawei\Proc\ApiHuaweiList.js" />
     <Content Include="bin\jw.easycc.kr.dll" />
     <Content Include="bin\jw.easycc.kr.pdb" />
     <Content Include="Contact.aspx" />
@@ -472,6 +475,10 @@
     <Content Include="SSO\Admin\Proc\AdminMenuRoleList.js" />
     <Content Include="SSO\Admin\Proc\AdminMenuRoleUpd.js" />
     <Content Include="SSO\Admin\Proc\AdminMyInfo.js" />
+    <Content Include="SSO\API\ApiWhiteList.aspx" />
+    <Content Include="SSO\API\ApiWhiteIns.aspx" />
+    <Content Include="SSO\API\Proc\ApiWhiteList.js" />
+    <Content Include="SSO\API\Proc\ApiWhiteIns.js" />
     <Content Include="SSO\Client\ClientIns.aspx" />
     <Content Include="SSO\Client\ClientList.aspx" />
     <Content Include="SSO\Client\Proc\ClientIns.js" />
@@ -488,6 +495,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Huawei\ApiHuaweiList.aspx.cs">
+      <DependentUpon>ApiHuaweiList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="API\Huawei\ApiHuaweiList.aspx.designer.cs">
+      <DependentUpon>ApiHuaweiList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contact.aspx.cs">
@@ -513,9 +527,11 @@
     </Compile>
     <Compile Include="DBModel\AdminMenuModel.cs" />
     <Compile Include="DBModel\AdminModel.cs" />
+    <Compile Include="DBModel\ApiModel.cs" />
     <Compile Include="DBModel\ClientModel.cs" />
     <Compile Include="DBServices\AdminMenuService.cs" />
     <Compile Include="DBServices\AdminService.cs" />
+    <Compile Include="DBServices\ApiService.cs" />
     <Compile Include="DBServices\ClientService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -627,6 +643,20 @@
     <Compile Include="SSO\Admin\AdminMyInfo.aspx.designer.cs">
       <DependentUpon>AdminMyInfo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SSO\API\ApiWhiteList.aspx.cs">
+      <DependentUpon>ApiWhiteList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SSO\API\ApiWhiteList.aspx.designer.cs">
+      <DependentUpon>ApiWhiteList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SSO\API\ApiWhiteIns.aspx.cs">
+      <DependentUpon>ApiWhiteIns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SSO\API\ApiWhiteIns.aspx.designer.cs">
+      <DependentUpon>ApiWhiteIns.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SSO\Client\ClientIns.aspx.cs">
       <DependentUpon>ClientIns.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -681,6 +711,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="API\Huawei\Proc\ApiHuaweiHandler.ashx" />
     <None Include="packages.config" />
     <Content Include="SSO\Admin\Proc\AdminHandler.ashx" />
     <Content Include="SSO\Admin\Proc\AdminMenuAccessUpdHandler.ashx" />
@@ -691,6 +722,7 @@
     <Content Include="SSO\MemberShip\Proc\MemberShipStepHandler.ashx" />
     <Content Include="SSO\Client\Proc\ClientFileUploadHandler.ashx" />
     <Content Include="SSO\Client\Proc\ClientHandler.ashx" />
+    <Content Include="SSO\API\Proc\ApiWhiteHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
