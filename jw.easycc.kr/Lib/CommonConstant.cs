@@ -4,7 +4,7 @@ namespace CommonLibrary.Constants
 {
     public class CommonConstant
     {
-        public static string SITE_TITLE             = ":::: EasyCC Connect ::::";
+        public static string SITE_TITLE             = ":::: EasyCC 정운관세법인 ::::";
         public const string ADMIN_FROM_EMAIL        = "JwccsAdmin@jwccs.com";
         public const string UPS_FROM_EMAIL          = "UPS@jwccs.com";
         public const string UPS_B2C_FROM_EMAIL      = "upsb2c@jwccs.com";

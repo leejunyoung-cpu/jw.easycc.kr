@@ -71,7 +71,7 @@ namespace easycc.co.kr
             Dictionary<int, string> menuGroupKind = new Dictionary<int, string>()
             {
                 { 4, "서비스" },
-                { 3, "API" },
+                { 3, "API 오더" },
                 { 2, "고객사" },
                 { 1, "시스템관리" }
             };

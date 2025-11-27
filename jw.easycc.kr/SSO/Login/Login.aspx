@@ -28,8 +28,7 @@
     <%: Scripts.Render("~/js/lib/sweetalert2/sweetalert2.js") %>
     <link rel="icon" href="/images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="/css/sweetalert2.min.css" />
-    <link rel="stylesheet" href="/css/admin.css?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>" />
-    <link rel="stylesheet" href="/css/reset.css?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>" />
+    <link rel="stylesheet" href="/css/login.css?ver=<%=DateTime.Now.ToString("yyyyMMddHHmmss")%>" />
     <script>
         $(document).ready(function () {
             if ($.cookie("LoginId") != "") {
@@ -52,7 +51,7 @@
                 }
             });
         });
-        
+
     </script>
 </head>
 <body>
@@ -61,21 +60,26 @@
         <asp:HiddenField runat="server" ID="errmsg" />
         <asp:HiddenField runat="server" ID="asd" />
         <!-- login_wrap//start================================//-->
-        <div class="login_wrap">
-	        <div class="login_logo"><img src="/images/logo_login.png" alt="easycc"></div>
-	        <div class="login_title">easycc 로그인</div>	  	
-	        <div class="login_body">	    	
-		        <ul>
-			        <li><asp:TextBox runat="server" ID="AdminID" CssClass="id" placeholder="아이디"/></li>
-			        <li><asp:TextBox runat="server" TextMode="Password" ID="AdminPwd" CssClass="pw" placeholder="비밀번호"/></li>
-                    <li><input type="checkbox" name="SaveId" id="SaveId"><label for="SaveId" class="wh"><span></span>    아이디 저장</label></li>
-		        </ul>
-                
-		        <button type="button" class="btn_login" id="btnLogin">로그인</button>
-	        </div>
-            <!--p class="member_btn"><a href="/SSO/MemberShip/MemberShipStep1">[회원가입]</a></!--p-->
-	        <div class="footer">ⓒEASYCC All Right Reserved.</div>
+      <div class="login-wrapper">
+        <div class="login-image"></div>
+
+        <div class="login-form">
+          <div class="logo"><img src="/images/logo6.png" alt="EASYCC 로고" /></div>
+          <div class="form-group">
+            <asp:TextBox runat="server" ID="AdminID" CssClass="form-input" placeholder="아이디"/>
+          </div>
+          <div class="form-group">
+            <asp:TextBox runat="server" TextMode="Password" ID="AdminPwd" CssClass="form-input" placeholder="비밀번호"/>
+          </div>
+
+          <label class="remember-row">
+            <input type="checkbox" name="SaveId" id="SaveId" />아이디 저장
+          </label>
+
+	      <button  type="button" class="btn-login" id="btnLogin">로그인</button>
+
         </div>
+      </div>
         <!-- login_wrap//end================================//-->
     </form>
     <!-- Loader //-->

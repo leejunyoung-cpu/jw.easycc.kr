@@ -121,7 +121,7 @@
                 </li>
             </ul>
 
-            <div id="AdminListGrid" style="width:100%; height:550px;"></div>
+            <div id="AdminListGrid" style="width:100%; height:600px;"></div>
             <div id="page"></div>
         </div>
 	</div>

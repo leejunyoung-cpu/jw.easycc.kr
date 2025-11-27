@@ -140,7 +140,7 @@
         <header class="header">		
 	        <div class="hd_inner">
 		        <h1 class="logo">
-			        <a href="/"><img src="images/logo.png" alt="정운관세법인" /></a>	
+			        <a href="/"><img src="images/logo6.png" alt="정운관세법인" /></a>	
 		        </h1>
 		        <div id="gnb" class="gnb">
 			        <ul class="ic_menu">

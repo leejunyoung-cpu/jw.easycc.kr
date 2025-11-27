@@ -97,7 +97,7 @@ function fnGetMenuKindDDLB(strObjID, menugroupkind) {
 
     opt = document.createElement("option");
     opt.setAttribute("value", "3");
-    opt.innerHTML = 'API';
+    opt.innerHTML = 'API 오더';
     if (menugroupkind == "3") {
         opt.setAttribute("selected", true);
     }
@@ -293,7 +293,7 @@ function fnddRow(objArgTableID) {
     td = document.createElement("td");
     strHtml = "<select name=\"menugroupkind\" id=\"menugroupkind_" + sortTotal + "\">";
     strHtml += "<option value=\"4\">서비스</option>";
-    strHtml += "<option value=\"3\">API</option>";
+    strHtml += "<option value=\"3\">API 오더</option>";
     strHtml += "<option value=\"2\">고객사</option>";
     strHtml += "<option value=\"1\">시스템관리</option>";
     strHtml += "</select>";
