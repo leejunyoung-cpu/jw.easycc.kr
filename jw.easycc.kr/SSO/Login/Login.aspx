@@ -64,7 +64,7 @@
         <div class="login-image"></div>
 
         <div class="login-form">
-          <div class="logo"><img src="/images/logo6.png" alt="EASYCC 로고" /></div>
+          <div class="logo"><img src="/images/logo7.png" alt="EASYCC 로고" /></div>
           <div class="form-group">
             <asp:TextBox runat="server" ID="AdminID" CssClass="form-input" placeholder="아이디"/>
           </div>
